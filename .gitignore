@@ -7,6 +7,7 @@ __pycache__/
 *.so
 
 backend/auth/youtube_client_secret.json
+backend/auth/youtube_token.json
 
 # Distribution / packaging
 .Python
