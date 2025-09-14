@@ -6,7 +6,7 @@ __pycache__/
 # C extensions
 *.so
 
-backend\auth\youtube_client_secret.json
+backend/auth/youtube_client_secret.json
 
 # Distribution / packaging
 .Python
