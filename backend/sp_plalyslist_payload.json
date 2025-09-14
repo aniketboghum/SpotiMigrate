@@ -1,0 +1,744 @@
+{
+  "response": [
+    {
+      "collaborative": false,
+      "description": "",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/3hRgPLDotxDsh6ouVIoJPG"
+      },
+      "href": "https://api.spotify.com/v1/playlists/3hRgPLDotxDsh6ouVIoJPG",
+      "id": "3hRgPLDotxDsh6ouVIoJPG",
+      "images": [
+        {
+          "height": null,
+          "url": "https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da840d94ba7f36a0a22c0f571d12",
+          "width": null
+        }
+      ],
+      "name": "Endless",
+      "owner": {
+        "display_name": "aniket",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/31lu56lzagm5t2nsq2bvx65deti4"
+        },
+        "href": "https://api.spotify.com/v1/users/31lu56lzagm5t2nsq2bvx65deti4",
+        "id": "31lu56lzagm5t2nsq2bvx65deti4",
+        "type": "user",
+        "uri": "spotify:user:31lu56lzagm5t2nsq2bvx65deti4"
+      },
+      "primary_color": null,
+      "public": true,
+      "snapshot_id": "AAAAIQGABm22JeASx6iL/w33hj8Dhzof",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/3hRgPLDotxDsh6ouVIoJPG/tracks",
+        "total": 19
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:3hRgPLDotxDsh6ouVIoJPG"
+    },
+    {
+      "collaborative": false,
+      "description": "",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/2gDbhvyA6LSoJFV5EBUF58"
+      },
+      "href": "https://api.spotify.com/v1/playlists/2gDbhvyA6LSoJFV5EBUF58",
+      "id": "2gDbhvyA6LSoJFV5EBUF58",
+      "images": [
+        {
+          "height": null,
+          "url": "https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da8405af9b5cd94c476cfd386bd1",
+          "width": null
+        }
+      ],
+      "name": "desi",
+      "owner": {
+        "display_name": "aniket",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/31lu56lzagm5t2nsq2bvx65deti4"
+        },
+        "href": "https://api.spotify.com/v1/users/31lu56lzagm5t2nsq2bvx65deti4",
+        "id": "31lu56lzagm5t2nsq2bvx65deti4",
+        "type": "user",
+        "uri": "spotify:user:31lu56lzagm5t2nsq2bvx65deti4"
+      },
+      "primary_color": null,
+      "public": true,
+      "snapshot_id": "AAAAVVjw6h1jpqSHfyo5qgp++PEoTbBh",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/2gDbhvyA6LSoJFV5EBUF58/tracks",
+        "total": 57
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:2gDbhvyA6LSoJFV5EBUF58"
+    },
+    {
+      "collaborative": false,
+      "description": "",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/6NE5mJUM38j6wTu8HjIH8a"
+      },
+      "href": "https://api.spotify.com/v1/playlists/6NE5mJUM38j6wTu8HjIH8a",
+      "id": "6NE5mJUM38j6wTu8HjIH8a",
+      "images": [
+        {
+          "height": null,
+          "url": "https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da8407e55e6009bd7abd9849cecb",
+          "width": null
+        }
+      ],
+      "name": "Say yes to me",
+      "owner": {
+        "display_name": "Ara",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/31ajlpfmppce4ateewzwtw2hmsla"
+        },
+        "href": "https://api.spotify.com/v1/users/31ajlpfmppce4ateewzwtw2hmsla",
+        "id": "31ajlpfmppce4ateewzwtw2hmsla",
+        "type": "user",
+        "uri": "spotify:user:31ajlpfmppce4ateewzwtw2hmsla"
+      },
+      "primary_color": null,
+      "public": true,
+      "snapshot_id": "AAAALUX1WdCo+YUNQsJlQMlrlqIM5djR",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/6NE5mJUM38j6wTu8HjIH8a/tracks",
+        "total": 43
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:6NE5mJUM38j6wTu8HjIH8a"
+    },
+    {
+      "collaborative": false,
+      "description": "",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/2c8x2zAe0PXAyaXMm2vPBi"
+      },
+      "href": "https://api.spotify.com/v1/playlists/2c8x2zAe0PXAyaXMm2vPBi",
+      "id": "2c8x2zAe0PXAyaXMm2vPBi",
+      "images": [
+        {
+          "height": null,
+          "url": "https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84e93111676592f7707632725a",
+          "width": null
+        }
+      ],
+      "name": "retro telugu",
+      "owner": {
+        "display_name": "aniket",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/31lu56lzagm5t2nsq2bvx65deti4"
+        },
+        "href": "https://api.spotify.com/v1/users/31lu56lzagm5t2nsq2bvx65deti4",
+        "id": "31lu56lzagm5t2nsq2bvx65deti4",
+        "type": "user",
+        "uri": "spotify:user:31lu56lzagm5t2nsq2bvx65deti4"
+      },
+      "primary_color": null,
+      "public": true,
+      "snapshot_id": "AAAAHSc0mFAJH86T20SYcEco8OiXsJyy",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/2c8x2zAe0PXAyaXMm2vPBi/tracks",
+        "total": 27
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:2c8x2zAe0PXAyaXMm2vPBi"
+    },
+    {
+      "collaborative": false,
+      "description": "",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/6f8vZQJvBV362DJc5N1WZe"
+      },
+      "href": "https://api.spotify.com/v1/playlists/6f8vZQJvBV362DJc5N1WZe",
+      "id": "6f8vZQJvBV362DJc5N1WZe",
+      "images": [
+        {
+          "height": null,
+          "url": "https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da843c09a5b1ff943d12767b3b3d",
+          "width": null
+        }
+      ],
+      "name": "hopeless romantic (Hindi)",
+      "owner": {
+        "display_name": "Ara",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/31ajlpfmppce4ateewzwtw2hmsla"
+        },
+        "href": "https://api.spotify.com/v1/users/31ajlpfmppce4ateewzwtw2hmsla",
+        "id": "31ajlpfmppce4ateewzwtw2hmsla",
+        "type": "user",
+        "uri": "spotify:user:31ajlpfmppce4ateewzwtw2hmsla"
+      },
+      "primary_color": null,
+      "public": true,
+      "snapshot_id": "AAAAJDSYjzAfZ886nHeJoavFrq1F6jbM",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/6f8vZQJvBV362DJc5N1WZe/tracks",
+        "total": 32
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:6f8vZQJvBV362DJc5N1WZe"
+    },
+    {
+      "collaborative": false,
+      "description": "",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/2NH7SV8J7ZobuVxDsgDrOe"
+      },
+      "href": "https://api.spotify.com/v1/playlists/2NH7SV8J7ZobuVxDsgDrOe",
+      "id": "2NH7SV8J7ZobuVxDsgDrOe",
+      "images": [
+        {
+          "height": null,
+          "url": "https://image-cdn-fa.spotifycdn.com/image/ab67706c0000da845eada0d6d304a6e21eee8b3a",
+          "width": null
+        }
+      ],
+      "name": "indie",
+      "owner": {
+        "display_name": "aniket",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/31lu56lzagm5t2nsq2bvx65deti4"
+        },
+        "href": "https://api.spotify.com/v1/users/31lu56lzagm5t2nsq2bvx65deti4",
+        "id": "31lu56lzagm5t2nsq2bvx65deti4",
+        "type": "user",
+        "uri": "spotify:user:31lu56lzagm5t2nsq2bvx65deti4"
+      },
+      "primary_color": null,
+      "public": true,
+      "snapshot_id": "AAAAJEXm8MTwfTfMoOCe1iZTGwjkx7L1",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/2NH7SV8J7ZobuVxDsgDrOe/tracks",
+        "total": 31
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:2NH7SV8J7ZobuVxDsgDrOe"
+    },
+    {
+      "collaborative": false,
+      "description": "a never ending playlist that includes countless number of sounds for any atmosphere - curated by @aplasticplant",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/1rOWw6SuIiVL6I6639NMYv"
+      },
+      "href": "https://api.spotify.com/v1/playlists/1rOWw6SuIiVL6I6639NMYv",
+      "id": "1rOWw6SuIiVL6I6639NMYv",
+      "images": [
+        {
+          "height": null,
+          "url": "https://image-cdn-ak.spotifycdn.com/image/ab67706c0000d72cb136ffa0dfcf6cb4b2128d17",
+          "width": null
+        }
+      ],
+      "name": "aplasticplaylist",
+      "owner": {
+        "display_name": "aplasticplant",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/1l3yfjr3rgi8nx7tlbhgri7ng"
+        },
+        "href": "https://api.spotify.com/v1/users/1l3yfjr3rgi8nx7tlbhgri7ng",
+        "id": "1l3yfjr3rgi8nx7tlbhgri7ng",
+        "type": "user",
+        "uri": "spotify:user:1l3yfjr3rgi8nx7tlbhgri7ng"
+      },
+      "primary_color": null,
+      "public": true,
+      "snapshot_id": "AAAD+2ee1M6CgLGwpjgYn50xEprD0LSQ",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/1rOWw6SuIiVL6I6639NMYv/tracks",
+        "total": 617
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:1rOWw6SuIiVL6I6639NMYv"
+    },
+    {
+      "collaborative": false,
+      "description": "",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/37TTN9JpylIU9KcfPxP5rE"
+      },
+      "href": "https://api.spotify.com/v1/playlists/37TTN9JpylIU9KcfPxP5rE",
+      "id": "37TTN9JpylIU9KcfPxP5rE",
+      "images": [
+        {
+          "height": null,
+          "url": "https://image-cdn-fa.spotifycdn.com/image/ab67706c0000da84b42efacefcc7b2af5faaad67",
+          "width": null
+        }
+      ],
+      "name": "uwu",
+      "owner": {
+        "display_name": "Ara",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/31ajlpfmppce4ateewzwtw2hmsla"
+        },
+        "href": "https://api.spotify.com/v1/users/31ajlpfmppce4ateewzwtw2hmsla",
+        "id": "31ajlpfmppce4ateewzwtw2hmsla",
+        "type": "user",
+        "uri": "spotify:user:31ajlpfmppce4ateewzwtw2hmsla"
+      },
+      "primary_color": null,
+      "public": false,
+      "snapshot_id": "AAAALPHaPYou/mKAzuELCrE7MJxIciOX",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/37TTN9JpylIU9KcfPxP5rE/tracks",
+        "total": 38
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:37TTN9JpylIU9KcfPxP5rE"
+    },
+    {
+      "collaborative": false,
+      "description": "",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/3DQhfvcHuzhsslblzTqSBM"
+      },
+      "href": "https://api.spotify.com/v1/playlists/3DQhfvcHuzhsslblzTqSBM",
+      "id": "3DQhfvcHuzhsslblzTqSBM",
+      "images": [
+        {
+          "height": null,
+          "url": "https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84f38a66fc9fecdc6b37d94acb",
+          "width": null
+        }
+      ],
+      "name": "retro hindi",
+      "owner": {
+        "display_name": "aniket",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/31lu56lzagm5t2nsq2bvx65deti4"
+        },
+        "href": "https://api.spotify.com/v1/users/31lu56lzagm5t2nsq2bvx65deti4",
+        "id": "31lu56lzagm5t2nsq2bvx65deti4",
+        "type": "user",
+        "uri": "spotify:user:31lu56lzagm5t2nsq2bvx65deti4"
+      },
+      "primary_color": null,
+      "public": true,
+      "snapshot_id": "AAAAO5QegPwNQKVr2gaGNcflX61YOUFP",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/3DQhfvcHuzhsslblzTqSBM/tracks",
+        "total": 48
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:3DQhfvcHuzhsslblzTqSBM"
+    },
+    {
+      "collaborative": false,
+      "description": "",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/1OwDImY6HoOzkJaXty2Jt5"
+      },
+      "href": "https://api.spotify.com/v1/playlists/1OwDImY6HoOzkJaXty2Jt5",
+      "id": "1OwDImY6HoOzkJaXty2Jt5",
+      "images": [
+        {
+          "height": null,
+          "url": "https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84550fe6918b106d4d12200e75",
+          "width": null
+        }
+      ],
+      "name": "PERFECT SONGS ☆",
+      "owner": {
+        "display_name": "Tigran",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/urartu99"
+        },
+        "href": "https://api.spotify.com/v1/users/urartu99",
+        "id": "urartu99",
+        "type": "user",
+        "uri": "spotify:user:urartu99"
+      },
+      "primary_color": null,
+      "public": true,
+      "snapshot_id": "AAAG1mWrFFISqXNDgqEqaww4xi/Pwl0N",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/1OwDImY6HoOzkJaXty2Jt5/tracks",
+        "total": 57
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:1OwDImY6HoOzkJaXty2Jt5"
+    },
+    {
+      "collaborative": false,
+      "description": "",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/5palhI3amd9WQb7u0BPJdq"
+      },
+      "href": "https://api.spotify.com/v1/playlists/5palhI3amd9WQb7u0BPJdq",
+      "id": "5palhI3amd9WQb7u0BPJdq",
+      "images": [
+        {
+          "height": null,
+          "url": "https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da846c787209a0073c60e6805fcf",
+          "width": null
+        }
+      ],
+      "name": "dance",
+      "owner": {
+        "display_name": "aniket",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/31lu56lzagm5t2nsq2bvx65deti4"
+        },
+        "href": "https://api.spotify.com/v1/users/31lu56lzagm5t2nsq2bvx65deti4",
+        "id": "31lu56lzagm5t2nsq2bvx65deti4",
+        "type": "user",
+        "uri": "spotify:user:31lu56lzagm5t2nsq2bvx65deti4"
+      },
+      "primary_color": null,
+      "public": false,
+      "snapshot_id": "AAAADKZBRtwYB9nu4Tp0LQgaaFQ0Dgo3",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/5palhI3amd9WQb7u0BPJdq/tracks",
+        "total": 6
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:5palhI3amd9WQb7u0BPJdq"
+    },
+    {
+      "collaborative": false,
+      "description": "",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/5OjqdouyNNTlvQIU5Byhfm"
+      },
+      "href": "https://api.spotify.com/v1/playlists/5OjqdouyNNTlvQIU5Byhfm",
+      "id": "5OjqdouyNNTlvQIU5Byhfm",
+      "images": [
+        {
+          "height": null,
+          "url": "https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84dcdc7c3be05ac3f1f5673e28",
+          "width": null
+        }
+      ],
+      "name": "rap",
+      "owner": {
+        "display_name": "aniket",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/31lu56lzagm5t2nsq2bvx65deti4"
+        },
+        "href": "https://api.spotify.com/v1/users/31lu56lzagm5t2nsq2bvx65deti4",
+        "id": "31lu56lzagm5t2nsq2bvx65deti4",
+        "type": "user",
+        "uri": "spotify:user:31lu56lzagm5t2nsq2bvx65deti4"
+      },
+      "primary_color": null,
+      "public": true,
+      "snapshot_id": "AAABDT0CIM938IljCTukfb9gwyMrOYad",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/5OjqdouyNNTlvQIU5Byhfm/tracks",
+        "total": 219
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:5OjqdouyNNTlvQIU5Byhfm"
+    },
+    {
+      "collaborative": false,
+      "description": "",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/5FGEjJ1beXHBDe7jDfO8MJ"
+      },
+      "href": "https://api.spotify.com/v1/playlists/5FGEjJ1beXHBDe7jDfO8MJ",
+      "id": "5FGEjJ1beXHBDe7jDfO8MJ",
+      "images": [
+        {
+          "height": null,
+          "url": "https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da8467a41e6c106b96b37d89cadb",
+          "width": null
+        }
+      ],
+      "name": "kalopsia.",
+      "owner": {
+        "display_name": "kurama",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/4e3hpc8uill2kpjbbqsmb2n41"
+        },
+        "href": "https://api.spotify.com/v1/users/4e3hpc8uill2kpjbbqsmb2n41",
+        "id": "4e3hpc8uill2kpjbbqsmb2n41",
+        "type": "user",
+        "uri": "spotify:user:4e3hpc8uill2kpjbbqsmb2n41"
+      },
+      "primary_color": null,
+      "public": true,
+      "snapshot_id": "AAABPrIWx62nTtpWy6ThBovzGe677GaF",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/5FGEjJ1beXHBDe7jDfO8MJ/tracks",
+        "total": 299
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:5FGEjJ1beXHBDe7jDfO8MJ"
+    },
+    {
+      "collaborative": false,
+      "description": "",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/2eAmXQo4LzHdK0G7OQPyiO"
+      },
+      "href": "https://api.spotify.com/v1/playlists/2eAmXQo4LzHdK0G7OQPyiO",
+      "id": "2eAmXQo4LzHdK0G7OQPyiO",
+      "images": [
+        {
+          "height": null,
+          "url": "https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84dc5ea6728e038eea00cb23dc",
+          "width": null
+        }
+      ],
+      "name": "EDM",
+      "owner": {
+        "display_name": "aniket",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/31lu56lzagm5t2nsq2bvx65deti4"
+        },
+        "href": "https://api.spotify.com/v1/users/31lu56lzagm5t2nsq2bvx65deti4",
+        "id": "31lu56lzagm5t2nsq2bvx65deti4",
+        "type": "user",
+        "uri": "spotify:user:31lu56lzagm5t2nsq2bvx65deti4"
+      },
+      "primary_color": null,
+      "public": true,
+      "snapshot_id": "AAAAKH4IDSocA3vmbhg3WfdU/Vnnq3KL",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/2eAmXQo4LzHdK0G7OQPyiO/tracks",
+        "total": 32
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:2eAmXQo4LzHdK0G7OQPyiO"
+    },
+    {
+      "collaborative": false,
+      "description": "",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/6YEjyd7zcfajYuQe81VmFg"
+      },
+      "href": "https://api.spotify.com/v1/playlists/6YEjyd7zcfajYuQe81VmFg",
+      "id": "6YEjyd7zcfajYuQe81VmFg",
+      "images": [
+        {
+          "height": 640,
+          "url": "https://mosaic.scdn.co/640/ab67616d00001e0236c5417732e53e23cb219246ab67616d00001e028aa545a0ea869940cce358b5ab67616d00001e02a09b231129ab1cb1a6efc57fab67616d00001e02e7dd69ac32cf313fde62cbad",
+          "width": 640
+        },
+        {
+          "height": 300,
+          "url": "https://mosaic.scdn.co/300/ab67616d00001e0236c5417732e53e23cb219246ab67616d00001e028aa545a0ea869940cce358b5ab67616d00001e02a09b231129ab1cb1a6efc57fab67616d00001e02e7dd69ac32cf313fde62cbad",
+          "width": 300
+        },
+        {
+          "height": 60,
+          "url": "https://mosaic.scdn.co/60/ab67616d00001e0236c5417732e53e23cb219246ab67616d00001e028aa545a0ea869940cce358b5ab67616d00001e02a09b231129ab1cb1a6efc57fab67616d00001e02e7dd69ac32cf313fde62cbad",
+          "width": 60
+        }
+      ],
+      "name": "Rock/Alt",
+      "owner": {
+        "display_name": "Kapil",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/he1428fxf9l26fiw1td7arzx4"
+        },
+        "href": "https://api.spotify.com/v1/users/he1428fxf9l26fiw1td7arzx4",
+        "id": "he1428fxf9l26fiw1td7arzx4",
+        "type": "user",
+        "uri": "spotify:user:he1428fxf9l26fiw1td7arzx4"
+      },
+      "primary_color": null,
+      "public": true,
+      "snapshot_id": "AAAAHCB8Pm86zcssWhDcgpfoIjC4j0DG",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/6YEjyd7zcfajYuQe81VmFg/tracks",
+        "total": 21
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:6YEjyd7zcfajYuQe81VmFg"
+    },
+    {
+      "collaborative": false,
+      "description": "nahi aati saar",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/0JBhdWT5ifnn5Hkm0Srn4Y"
+      },
+      "href": "https://api.spotify.com/v1/playlists/0JBhdWT5ifnn5Hkm0Srn4Y",
+      "id": "0JBhdWT5ifnn5Hkm0Srn4Y",
+      "images": [
+        {
+          "height": null,
+          "url": "https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84ccee51595231cf4de082c2d8",
+          "width": null
+        }
+      ],
+      "name": "hindi",
+      "owner": {
+        "display_name": "aniket",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/31lu56lzagm5t2nsq2bvx65deti4"
+        },
+        "href": "https://api.spotify.com/v1/users/31lu56lzagm5t2nsq2bvx65deti4",
+        "id": "31lu56lzagm5t2nsq2bvx65deti4",
+        "type": "user",
+        "uri": "spotify:user:31lu56lzagm5t2nsq2bvx65deti4"
+      },
+      "primary_color": null,
+      "public": true,
+      "snapshot_id": "AAAA5XDucN3f5mT4vEZwSvqHMKrhWaqH",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/0JBhdWT5ifnn5Hkm0Srn4Y/tracks",
+        "total": 184
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:0JBhdWT5ifnn5Hkm0Srn4Y"
+    },
+    {
+      "collaborative": false,
+      "description": "",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/6cfKU4I6wgTDCyNjVmQAJ4"
+      },
+      "href": "https://api.spotify.com/v1/playlists/6cfKU4I6wgTDCyNjVmQAJ4",
+      "id": "6cfKU4I6wgTDCyNjVmQAJ4",
+      "images": [
+        {
+          "height": 640,
+          "url": "https://mosaic.scdn.co/640/ab67616d00001e021b84766b1daca9c6de9d4739ab67616d00001e024804ecfaab06c2d2fb901dc6ab67616d00001e026acbb6167824a651fe60dd40ab67616d00001e029bb7e360f7b33b4aef4976f5",
+          "width": 640
+        },
+        {
+          "height": 300,
+          "url": "https://mosaic.scdn.co/300/ab67616d00001e021b84766b1daca9c6de9d4739ab67616d00001e024804ecfaab06c2d2fb901dc6ab67616d00001e026acbb6167824a651fe60dd40ab67616d00001e029bb7e360f7b33b4aef4976f5",
+          "width": 300
+        },
+        {
+          "height": 60,
+          "url": "https://mosaic.scdn.co/60/ab67616d00001e021b84766b1daca9c6de9d4739ab67616d00001e024804ecfaab06c2d2fb901dc6ab67616d00001e026acbb6167824a651fe60dd40ab67616d00001e029bb7e360f7b33b4aef4976f5",
+          "width": 60
+        }
+      ],
+      "name": "Anime Openings/outros ^_^",
+      "owner": {
+        "display_name": "Ara",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/31ajlpfmppce4ateewzwtw2hmsla"
+        },
+        "href": "https://api.spotify.com/v1/users/31ajlpfmppce4ateewzwtw2hmsla",
+        "id": "31ajlpfmppce4ateewzwtw2hmsla",
+        "type": "user",
+        "uri": "spotify:user:31ajlpfmppce4ateewzwtw2hmsla"
+      },
+      "primary_color": null,
+      "public": true,
+      "snapshot_id": "AAAAPKCZudXKpP51I7br1CzS1NLrWqrK",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/6cfKU4I6wgTDCyNjVmQAJ4/tracks",
+        "total": 34
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:6cfKU4I6wgTDCyNjVmQAJ4"
+    },
+    {
+      "collaborative": false,
+      "description": "",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/6bmoQtJd4IacYiuuK7Mvvg"
+      },
+      "href": "https://api.spotify.com/v1/playlists/6bmoQtJd4IacYiuuK7Mvvg",
+      "id": "6bmoQtJd4IacYiuuK7Mvvg",
+      "images": [
+        {
+          "height": null,
+          "url": "https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da840591700924ef8749f695e1f7",
+          "width": null
+        }
+      ],
+      "name": "alt hip-hop/R&B",
+      "owner": {
+        "display_name": "aniket",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/31lu56lzagm5t2nsq2bvx65deti4"
+        },
+        "href": "https://api.spotify.com/v1/users/31lu56lzagm5t2nsq2bvx65deti4",
+        "id": "31lu56lzagm5t2nsq2bvx65deti4",
+        "type": "user",
+        "uri": "spotify:user:31lu56lzagm5t2nsq2bvx65deti4"
+      },
+      "primary_color": null,
+      "public": true,
+      "snapshot_id": "AAAAfU3oo3rB0Lk6VHAE/BmelhuZwty+",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/6bmoQtJd4IacYiuuK7Mvvg/tracks",
+        "total": 96
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:6bmoQtJd4IacYiuuK7Mvvg"
+    },
+    {
+      "collaborative": false,
+      "description": "",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/0TwJ6JvFws06elyn3sPXTe"
+      },
+      "href": "https://api.spotify.com/v1/playlists/0TwJ6JvFws06elyn3sPXTe",
+      "id": "0TwJ6JvFws06elyn3sPXTe",
+      "images": [
+        {
+          "height": null,
+          "url": "https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84b75a5466b3f8bec38d8c150d",
+          "width": null
+        }
+      ],
+      "name": "telugu",
+      "owner": {
+        "display_name": "aniket",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/31lu56lzagm5t2nsq2bvx65deti4"
+        },
+        "href": "https://api.spotify.com/v1/users/31lu56lzagm5t2nsq2bvx65deti4",
+        "id": "31lu56lzagm5t2nsq2bvx65deti4",
+        "type": "user",
+        "uri": "spotify:user:31lu56lzagm5t2nsq2bvx65deti4"
+      },
+      "primary_color": null,
+      "public": true,
+      "snapshot_id": "AAAAvPk0PmBvViWPwJax+rT1E3zke6l9",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/0TwJ6JvFws06elyn3sPXTe/tracks",
+        "total": 129
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:0TwJ6JvFws06elyn3sPXTe"
+    },
+    {
+      "collaborative": false,
+      "description": "",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/0Bw0meUzigzXDWxwzkxpUJ"
+      },
+      "href": "https://api.spotify.com/v1/playlists/0Bw0meUzigzXDWxwzkxpUJ",
+      "id": "0Bw0meUzigzXDWxwzkxpUJ",
+      "images": [
+        {
+          "height": null,
+          "url": "https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84f6059a27d36a3503a6d041b7",
+          "width": null
+        }
+      ],
+      "name": "J-pop",
+      "owner": {
+        "display_name": "aniket",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/31lu56lzagm5t2nsq2bvx65deti4"
+        },
+        "href": "https://api.spotify.com/v1/users/31lu56lzagm5t2nsq2bvx65deti4",
+        "id": "31lu56lzagm5t2nsq2bvx65deti4",
+        "type": "user",
+        "uri": "spotify:user:31lu56lzagm5t2nsq2bvx65deti4"
+      },
+      "primary_color": null,
+      "public": true,
+      "snapshot_id": "AAAALIyC7h2VrFRxTOHXSZifRZfk9mim",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/0Bw0meUzigzXDWxwzkxpUJ/tracks",
+        "total": 27
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:0Bw0meUzigzXDWxwzkxpUJ"
+    }
+  ]
+}

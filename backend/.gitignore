@@ -1,0 +1,5 @@
+.env
+
+auth\youtube_client_secret.json
+
+.cache
