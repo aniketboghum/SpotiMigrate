@@ -16,29 +16,30 @@ def get_spotify_playlists():
     return { 'playlists' : playlists }
 
 def get_playlist_tracks(playlist_id: str):
-    sp = spotify_auth.current_spotify_user
-    if not sp:
-        return {"error": "User not authenticated"}
+    try:
+        sp = spotify_auth.current_spotify_user
+        if not sp:
+            # return {"error": "User not authenticated"}
+            return None
 
-    tracks = []
-    results = sp.playlist_items(playlist_id, limit=100)  # first page
+        tracks = []
+        results = sp.playlist_items(playlist_id, limit=100)  # first page
 
-    while results:
-        for item in results["items"]:
-            track = item["track"]
-            if track:  # skip if null (sometimes happens)
-                tracks.append({
-                    "id": track["id"],
-                    "name": track["name"],
-                    "artists": [artist["name"] for artist in track["artists"]],
-                    "album": track["album"]["name"],
-                    "duration_ms": track["duration_ms"],
-                    "uri": track["uri"],
-                })
+        while results:
+            for item in results["items"]:
+                track = item["track"]
+                if track:  # skip if null (sometimes happens)
+                    tracks.append({
+                        "name": track["name"],
+                        "artists": [artist["name"] for artist in track["artists"]],
+                        "album": track["album"]["name"],
+                    })
 
-        if results["next"]:  # pagination
-            results = sp.next(results)
-        else:
-            results = None
+            if results["next"]:  # pagination
+                results = sp.next(results)
+            else:
+                results = None
 
-    return {"tracks": tracks}
+        return {"tracks": tracks}
+    except Exception as e:
+        return {"error": f"error while getting tracks from spotify: "+ str(e) }
