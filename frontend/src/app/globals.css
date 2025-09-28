@@ -1,6 +1,14 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+@font-face {
+  font-family: 'Sligoil';
+  src: url('/fonts/Sligoil.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -118,5 +126,13 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .font-logo {
+    font-family: 'Sligoil', var(--font-geist-sans), ui-sans-serif, system-ui;
+    font-weight: normal;
+    letter-spacing: 0.02em;
   }
 }

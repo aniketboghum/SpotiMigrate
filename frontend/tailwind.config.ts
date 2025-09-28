@@ -1,11 +1,11 @@
 module.exports = {
-  darkMode: "class", // 👈 important
-    content: [
-    "./app/**/*.{ts,tsx}",
-    "./components/**/*.{ts,tsx}",
-    ],
-    theme: {
+  darkMode: "class",
+  content: [
+    "./src/app/**/*.{ts,tsx}",
+    "./src/components/**/*.{ts,tsx}",
+  ],
+  theme: {
     extend: {},
-    },
-    plugins: [],
+  },
+  plugins: [],
 }
