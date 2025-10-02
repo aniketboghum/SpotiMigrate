@@ -1,5 +1,5 @@
-from fastapi import APIRouter, Request
-from fastapi.responses import RedirectResponse
+from fastapi import APIRouter, Request, HTTPException
+from fastapi.responses import RedirectResponse, HTMLResponse
 import auth.spotify_auth as spotify_auth
 import service.spotify_service as spotify_service
 
@@ -16,13 +16,20 @@ def login():
 
 @spotify_router.get("/callback")
 def callback(request: Request):
-    playlist_url = spotify_auth.callback(request)
-    return RedirectResponse(playlist_url)
+    return spotify_auth.callback(request)
 
 @spotify_router.get("/playlists")
 def get_playlists():
-    return spotify_service.get_spotify_playlists()
+    try:
+        playlists = spotify_service.get_spotify_playlists()
+        return playlists
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to fetch playlists: {str(e)}")
 
 @spotify_router.get("/playlists/{playlist_id}/tracks")
 def get_playlist_tracks(playlist_id: str):
-    return spotify_service.get_playlist_tracks(playlist_id)
+    try:
+        tracks = spotify_service.get_playlist_tracks(playlist_id)
+        return tracks
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to fetch playlist tracks: {str(e)}")

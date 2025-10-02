@@ -1,10 +1,16 @@
-from fastapi import APIRouter, Request
+from fastapi import APIRouter, Request, HTTPException
 from fastapi.responses import RedirectResponse
+from pydantic import BaseModel
 import auth.youtube_auth as youtube_auth
 from service import spotify_service
 import service.youtube_service as youtube_service
 
 youtube_router = APIRouter()
+
+# Pydantic model for request body
+class PlaylistMigrationRequest(BaseModel):
+    sp_playlistId: str
+    yt_playlist_name: str
 
 @youtube_router.get("/login")
 def login():
@@ -17,18 +23,18 @@ def callback(request: Request):
     if not code:
         return {"error": "Authorization code not found in callback."}
     
-    youtube_auth.exchange_code_for_token(code)
-    return RedirectResponse("/youtube/playlists")  # Redirect to playlists page after successful login
+    return youtube_auth.exchange_code_for_token(code)
 
-@youtube_router.get("/playlists")
-def create_whole_playlists(sp_playlistId : str, yt_playlist_name: str):
+@youtube_router.post("/playlists")
+def create_whole_playlists(request: PlaylistMigrationRequest):
     try:
         # Create a new YouTube playlist
-        yt_playlist_id = youtube_service.create_playlist(yt_playlist_name)
+        yt_playlist_id = youtube_service.create_playlist(request.yt_playlist_name)
         
         # Get tracks from the specified Spotify playlist
-        sp_tracks = spotify_service.get_playlist_tracks(sp_playlistId)
+        sp_tracks = spotify_service.get_playlist_tracks(request.sp_playlistId)
 
+        tracks_added = 0
         if sp_tracks:
             for track in sp_tracks['tracks']:
                 track_name = track["name"]
@@ -41,8 +47,13 @@ def create_whole_playlists(sp_playlistId : str, yt_playlist_name: str):
                 video_id = youtube_service.search_song(query)
                 if video_id:
                     youtube_service.add_song_to_playlist(yt_playlist_id, video_id)
+                    tracks_added += 1
         
-        return {"message": f"Playlist '{yt_playlist_name}' created on YouTube with {len(    )} tracks."}
+        return {
+            "message": f"Playlist '{request.yt_playlist_name}' created on YouTube with {tracks_added} tracks.",
+            "playlist_id": yt_playlist_id,
+            "tracks_added": tracks_added
+        }
     except Exception as e:
-        return {"error": str(e)}
+        raise HTTPException(status_code=500, detail=str(e))
     

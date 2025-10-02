@@ -1,9 +1,80 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Header } from "@/components/header";
 import { Combobox } from "@/components/ui/combobox";
 
 export default function Home() {
+  const [isSpotifyConnected, setIsSpotifyConnected] = useState(false);
+  const [playlists, setPlaylists] = useState([]);
+
+  // Check for existing token on component mount
+  useEffect(() => {
+
+  }, []);
+
+  // Disconnect function
+  const handleSpotifyDisconnect = () => {
+    localStorage.removeItem('spotify_token');
+    localStorage.removeItem('spotify_refresh_token');
+    localStorage.removeItem('spotify_expires_in');
+    localStorage.removeItem('spotify_auth_time');
+    setIsSpotifyConnected(false);
+    setPlaylists([]);
+  };
+
+  // OAuth popup handler function
+  const handleSpotifyLogin = () => {
+    const popup = window.open(
+      'http://127.0.0.1:8000/spotify/login', // Your custom API endpoint
+      'spotify-oauth',
+      'width=500,height=600,scrollbars=yes,resizable=yes'
+    );
+
+    // Listen for messages from the popup
+    const messageListener = async (event: MessageEvent) => {
+      console.log('Received message from popup:', event.origin, event.data);
+      
+      // Make sure the message is from your backend domain for security
+      if (event.origin !== 'http://127.0.0.1:8000' && event.origin !== 'http://localhost:8000') {
+        console.log('Message rejected due to origin mismatch. Expected: http://127.0.0.1:8000 or http://localhost:8000, Got:', event.origin);
+        return;
+      }
+
+      if (event.data.type === 'SPOTIFY_AUTH_SUCCESS') {
+        // Handle successful authentication
+        console.log('Spotify authentication successful:', event.data);
+        setIsSpotifyConnected(true);
+        const playlists = await fetch('http://127.0.0.1:8000/spotify/playlists');
+        const playlistsData = await playlists.json();
+        setPlaylists(playlistsData.playlists);
+
+        popup?.close();
+        window.removeEventListener('message', messageListener);
+        
+        console.log('✅ Successfully connected to Spotify!');
+      } else if (event.data.type === 'SPOTIFY_AUTH_ERROR') {
+        // Handle authentication error
+        console.error('Spotify authentication failed:', event.data.error);
+        alert('Spotify authentication failed. Please try again.');
+        popup?.close();
+        window.removeEventListener('message', messageListener);
+      }
+    };
+
+    // Add message listener
+    window.addEventListener('message', messageListener);
+
+    // Check if popup was closed manually
+    const checkClosed = setInterval(() => {
+      if (popup?.closed) {
+        clearInterval(checkClosed);
+        window.removeEventListener('message', messageListener);
+      }
+    }, 1000);
+  };
   return (
     <div className="relative min-h-screen bg-gradient-to-b from-background to-muted/20">
       <Header />
@@ -19,10 +90,34 @@ export default function Home() {
               Seamlessly migrate your music between Spotify and YouTube Music with accurate matches and zero fuss.
             </p>
             <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
-              <Button className="w-full sm:w-auto">
-                <img src="/icons/spotify.png" alt="spotify" width={16} height={16} />
-                <span className="ml-2">Login with Spotify</span>
-              </Button>
+              {!isSpotifyConnected ? (
+                <Button 
+                  className="w-full sm:w-auto" 
+                  onClick={handleSpotifyLogin}
+                >
+                  <img src="/icons/spotify.png" alt="spotify" width={16} height={16} />
+                  <span className="ml-2">Login with Spotify</span>
+                </Button>
+              ) : (
+                <div className="flex items-center gap-2">
+                  <Button 
+                    className="w-full sm:w-auto" 
+                    variant="outline"
+                    disabled
+                  >
+                    <img src="/icons/spotify.png" alt="spotify" width={16} height={16} />
+                    <span className="ml-2">✓ Connected to Spotify</span>
+                  </Button>
+                  <Button 
+                    variant="ghost" 
+                    size="sm"
+                    onClick={handleSpotifyDisconnect}
+                    className="text-muted-foreground hover:text-foreground"
+                  >
+                    Disconnect
+                  </Button>
+                </div>
+              )}
               <Button className="w-full sm:w-auto" variant="secondary">
                 <img src="/icons/youtube_music.png" alt="youtube music" width={16} height={16} />
                 <span className="ml-2">Login with YouTube</span>
@@ -52,7 +147,7 @@ export default function Home() {
 
         {/* CTA */}
         <div className="mt-12 text-center flex flex-col items-center justify-center gap-4">
-          <Combobox />
+          <Combobox playlists={playlists}/>
           <Button size="lg" className="px-8">
             <a href="/migrationq">Start Migrating</a>
           </Button>

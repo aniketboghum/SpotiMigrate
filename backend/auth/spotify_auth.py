@@ -1,5 +1,5 @@
 from fastapi import Request
-from fastapi.responses import RedirectResponse
+from fastapi.responses import HTMLResponse, RedirectResponse
 import os
 from dotenv import load_dotenv
 import spotipy
@@ -32,6 +32,7 @@ def login():
     return auth_url
 
 def callback(request: Request):
+  try:
     code = request.query_params.get("code")
     if not code:
         return {"error": "Missing code in callback"}
@@ -42,5 +43,37 @@ def callback(request: Request):
     global current_spotify_user
     current_spotify_user = spotipy.Spotify(auth=token_info["access_token"])
 
-    # Redirect to frontend or success page
-    return "http://127.0.0.1:8000/spotify/playlists"
+
+    html_content = f"""<!DOCTYPE html>
+                        <html>
+                          <head>
+                            <title>Authentication Success</title>
+                          </head>
+                          <body>
+                            <script>
+                              window.opener.postMessage({{
+                                type: 'SPOTIFY_AUTH_SUCCESS',
+                              }}, 'http://localhost:3000'); // Allow any origin for the parent window
+                              window.close();
+                            </script>
+                            <p>Authentication successful! This window will close automatically.</p>
+                          </body>
+                        </html>"""
+    return HTMLResponse(content=html_content)
+  except Exception as e:
+    html_content = html_content = f"""<!DOCTYPE html>
+                        <html>
+                          <head>
+                            <title>Authentication Success</title>
+                          </head>
+                          <body>
+                            <script>
+                              window.opener.postMessage({{
+                                type: 'SPOTIFY_AUTH_ERROR',
+                              }}, 'http://localhost:3000'); // Allow any origin for the parent window
+                              window.close();
+                            </script>
+                            <p>Authentication successful! This window will close automatically.</p>
+                          </body>
+                        </html>"""
+    return HTMLResponse(content=html_content)

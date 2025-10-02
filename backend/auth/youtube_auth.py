@@ -2,6 +2,7 @@ import os
 from google_auth_oauthlib.flow import Flow
 from google.oauth2.credentials import Credentials
 from google.auth.transport.requests import Request
+from fastapi.responses import HTMLResponse
 
 SCOPES = ["https://www.googleapis.com/auth/youtube.force-ssl"]
 
@@ -36,7 +37,31 @@ def exchange_code_for_token(code: str):
     with open(TOKEN_PATH, "w") as token_file:
         token_file.write(creds.to_json())
 
-    return creds
+    # Create HTML response with token information
+    access_token = creds.token if creds.token else ""
+    refresh_token = creds.refresh_token if creds.refresh_token else ""
+    expires_in = 3600  # Default expiry time
+
+    html_content = f"""<!DOCTYPE html>
+<html>
+  <head>
+    <title>Authentication Success</title>
+  </head>
+  <body>
+    <script>
+      window.opener.postMessage({{
+        type: 'YOUTUBE_AUTH_SUCCESS',
+        token: '{access_token}',
+        refresh_token: '{refresh_token}',
+        expires_in: {expires_in}
+      }}, 'http://localhost:3000'); // Your frontend URL
+      window.close();
+    </script>
+    <p>Authentication successful! This window will close automatically.</p>
+  </body>
+</html>"""
+    
+    return HTMLResponse(content=html_content)
 
 
 def get_credentials():

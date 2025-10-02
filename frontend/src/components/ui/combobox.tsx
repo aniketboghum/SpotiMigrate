@@ -19,30 +19,8 @@ import {
     PopoverTrigger,
 } from "@/components/ui/popover"
 
-const frameworks = [
-  {
-    value: "next.js",
-    label: "Next.js",
-  },
-  {
-    value: "sveltekit",
-    label: "SvelteKit",
-  },
-  {
-    value: "nuxt.js",
-    label: "Nuxt.js",
-  },
-  {
-    value: "remix",
-    label: "Remix",
-  },
-  {
-    value: "astro",
-    label: "Astro",
-  },
-]
 
-export function Combobox() {
+export function Combobox(props: {playlists: any[]}) {
   const [open, setOpen] = React.useState(false)
   const [value, setValue] = React.useState("")
 
@@ -56,31 +34,31 @@ export function Combobox() {
           className="w-[200px] justify-between"
         >
           {value
-            ? frameworks.find((framework) => framework.value === value)?.label
+            ? props.playlists.find((playlist) => playlist.id === value)?.name
             : "Select Playlist..."}
           <ChevronsUpDown className="opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-[200px] p-0">
         <Command>
-          <CommandInput placeholder="Search framework..." className="h-9" />
+          {/* <CommandInput placeholder="Search Playlists..." className="h-9" /> */}
           <CommandList>
-            <CommandEmpty>No framework found.</CommandEmpty>
+            <CommandEmpty>No Playlist found.</CommandEmpty>
             <CommandGroup>
-              {frameworks.map((framework) => (
+              {props.playlists.map((playlist) => (
                 <CommandItem
-                  key={framework.value}
-                  value={framework.value}
+                  key={playlist.id}
+                  value={playlist.id}
                   onSelect={(currentValue) => {
                     setValue(currentValue === value ? "" : currentValue)
                     setOpen(false)
                   }}
                 >
-                  {framework.label}
+                  {playlist.name}
                   <Check
                     className={cn(
                       "ml-auto",
-                      value === framework.value ? "opacity-100" : "opacity-0"
+                      value === playlist.id ? "opacity-100" : "opacity-0"
                     )}
                   />
                 </CommandItem>
