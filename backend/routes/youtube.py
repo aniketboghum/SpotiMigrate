@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Request, HTTPException
-from fastapi.responses import RedirectResponse
+from fastapi.responses import RedirectResponse, HTMLResponse
 from pydantic import BaseModel
 import auth.youtube_auth as youtube_auth
 from service import spotify_service
@@ -20,10 +20,67 @@ def login():
 @youtube_router.get("/callback")
 def callback(request: Request):         
     code = request.query_params.get("code")
-    if not code:
-        return {"error": "Authorization code not found in callback."}
+    error = request.query_params.get("error")
     
-    return youtube_auth.exchange_code_for_token(code)
+    if error:
+        # Handle OAuth error
+        html_content = f"""<!DOCTYPE html>
+<html>
+  <head>
+    <title>Authentication Error</title>
+  </head>
+  <body>
+    <script>
+      window.opener.postMessage({{
+        type: 'YOUTUBE_AUTH_ERROR',
+        error: '{error}'
+      }}, 'http://localhost:3000');
+      window.close();
+    </script>
+    <p>Authentication failed: {error}</p>
+  </body>
+</html>"""
+        return HTMLResponse(content=html_content)
+    
+    if not code:
+        html_content = """<!DOCTYPE html>
+<html>
+  <head>
+    <title>Authentication Error</title>
+  </head>
+  <body>
+    <script>
+      window.opener.postMessage({{
+        type: 'YOUTUBE_AUTH_ERROR',
+        error: 'Authorization code not found in callback.'
+      }}, 'http://localhost:3000');
+      window.close();
+    </script>
+    <p>Authentication failed: Authorization code not found in callback.</p>
+  </body>
+</html>"""
+        return HTMLResponse(content=html_content)
+    
+    try:
+        return youtube_auth.exchange_code_for_token(code)
+    except Exception as e:
+        html_content = f"""<!DOCTYPE html>
+<html>
+  <head>
+    <title>Authentication Error</title>
+  </head>
+  <body>
+    <script>
+      window.opener.postMessage({{
+        type: 'YOUTUBE_AUTH_ERROR',
+        error: '{str(e)}'
+      }}, 'http://localhost:3000');
+      window.close();
+    </script>
+    <p>Authentication failed: {str(e)}</p>
+  </body>
+</html>"""
+        return HTMLResponse(content=html_content)
 
 @youtube_router.post("/playlists")
 def create_whole_playlists(request: PlaylistMigrationRequest):

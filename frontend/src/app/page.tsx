@@ -5,9 +5,14 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Header } from "@/components/header";
 import { Combobox } from "@/components/ui/combobox";
+import * as React from "react";
 
 export default function Home() {
   const [isSpotifyConnected, setIsSpotifyConnected] = useState(false);
+  const [isYouTubeConnected, setIsYouTubeConnected] = useState(false);
+  const [selectedPlaylistId, setSelectedPlaylistId] = React.useState("")
+  const [selectedPlaylistName, setSelectedPlaylistName] = React.useState("")  
+
   const [playlists, setPlaylists] = useState([]);
 
   // Check for existing token on component mount
@@ -15,14 +20,14 @@ export default function Home() {
 
   }, []);
 
-  // Disconnect function
+  // Disconnect functions
   const handleSpotifyDisconnect = () => {
-    localStorage.removeItem('spotify_token');
-    localStorage.removeItem('spotify_refresh_token');
-    localStorage.removeItem('spotify_expires_in');
-    localStorage.removeItem('spotify_auth_time');
     setIsSpotifyConnected(false);
     setPlaylists([]);
+  };
+
+  const handleYouTubeDisconnect = () => {
+    setIsYouTubeConnected(false);
   };
 
   // OAuth popup handler function
@@ -75,6 +80,89 @@ export default function Home() {
       }
     }, 1000);
   };
+
+  // YouTube OAuth popup handler function
+  const handleYouTubeLogin = () => {
+    const popup = window.open(
+      'http://127.0.0.1:8000/youtube/login',
+      'youtube-oauth',
+      'width=500,height=600,scrollbars=yes,resizable=yes'
+    );
+
+    // Listen for messages from the popup
+    const messageListener = async (event: MessageEvent) => {
+      console.log('Received message from popup:', event.origin, event.data);
+      
+      // Make sure the message is from your backend domain for security
+      if (event.origin !== 'http://127.0.0.1:8000' && event.origin !== 'http://localhost:8000') {
+        console.log('Message rejected due to origin mismatch. Expected: http://127.0.0.1:8000 or http://localhost:8000, Got:', event.origin);
+        return;
+      }
+
+      if (event.data.type === 'YOUTUBE_AUTH_SUCCESS') {
+        // Handle successful authentication
+        console.log('YouTube authentication successful:', event.data);
+        setIsYouTubeConnected(true);
+
+        popup?.close();
+        window.removeEventListener('message', messageListener);
+        
+        console.log('✅ Successfully connected to YouTube!');
+      } else if (event.data.type === 'YOUTUBE_AUTH_ERROR') {
+        // Handle authentication error
+        console.error('YouTube authentication failed:', event.data.error);
+        alert('YouTube authentication failed. Please try again.');
+        popup?.close();
+        window.removeEventListener('message', messageListener);
+      }
+    };
+
+    // Add message listener
+    window.addEventListener('message', messageListener);
+
+    // Check if popup was closed manually
+    const checkClosed = setInterval(() => {
+      if (popup?.closed) {
+        clearInterval(checkClosed);
+        window.removeEventListener('message', messageListener);
+      }
+    }, 1000);
+  };
+
+  // Handle migration start
+  const handleStartMigration = async () => {
+    console.log("playlist id", selectedPlaylistId)
+    console.log("playlist name", selectedPlaylistName)
+    if (!selectedPlaylistId || !isSpotifyConnected || !isYouTubeConnected) {
+      alert('Please connect to both Spotify and YouTube, and select a playlist to migrate.');
+      return;
+    }
+
+    try {
+      const response = await fetch('http://127.0.0.1:8000/youtube/playlists', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          sp_playlistId: selectedPlaylistId,
+          yt_playlist_name: selectedPlaylistName
+        }),
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        alert(`Migration successful! Created playlist "${result.message}"`);
+      } else {
+        const error = await response.json();
+        alert(`Migration failed: ${error.detail || 'Unknown error'}`);
+      }
+    } catch (error) {
+      console.error('Migration error:', error);
+      alert('Migration failed. Please try again.');
+    }
+  };
+
   return (
     <div className="relative min-h-screen bg-gradient-to-b from-background to-muted/20">
       <Header />
@@ -118,10 +206,35 @@ export default function Home() {
                   </Button>
                 </div>
               )}
-              <Button className="w-full sm:w-auto" variant="secondary">
-                <img src="/icons/youtube_music.png" alt="youtube music" width={16} height={16} />
-                <span className="ml-2">Login with YouTube</span>
-              </Button>
+              {!isYouTubeConnected ? (
+                <Button 
+                  className="w-full sm:w-auto" 
+                  variant="secondary"
+                  onClick={handleYouTubeLogin}
+                >
+                  <img src="/icons/youtube_music.png" alt="youtube music" width={16} height={16} />
+                  <span className="ml-2">Login with YouTube</span>
+                </Button>
+              ) : (
+                <div className="flex items-center gap-2">
+                  <Button 
+                    className="w-full sm:w-auto" 
+                    variant="outline"
+                    disabled
+                  >
+                    <img src="/icons/youtube_music.png" alt="youtube music" width={16} height={16} />
+                    <span className="ml-2">✓ Connected to YouTube</span>
+                  </Button>
+                  <Button 
+                    variant="ghost" 
+                    size="sm"
+                    onClick={handleYouTubeDisconnect}
+                    className="text-muted-foreground hover:text-foreground"
+                  >
+                    Disconnect
+                  </Button>
+                </div>
+              )}
             </div>
           </div>
         </section>
@@ -147,9 +260,19 @@ export default function Home() {
 
         {/* CTA */}
         <div className="mt-12 text-center flex flex-col items-center justify-center gap-4">
-          <Combobox playlists={playlists}/>
-          <Button size="lg" className="px-8">
-            <a href="/migrationq">Start Migrating</a>
+          <Combobox playlists={playlists} 
+                    selectedPlaylistId={selectedPlaylistId} 
+                    setSelectedPlaylistId={setSelectedPlaylistId}
+                    selectedPlaylistName={selectedPlaylistName}
+                    setSelectedPlaylistName={setSelectedPlaylistName}/>
+          
+          <Button 
+            size="lg" 
+            className="px-8"
+            onClick={handleStartMigration}
+            disabled={!selectedPlaylistId || !isSpotifyConnected || !isYouTubeConnected}
+          >
+            Start Migrating
           </Button>
         </div>
       </main>

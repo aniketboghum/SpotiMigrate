@@ -19,8 +19,15 @@ import {
     PopoverTrigger,
 } from "@/components/ui/popover"
 
+interface ComboboxProps {
+  playlists: any[];
+  selectedPlaylistId: string;
+  selectedPlaylistName: string;
+  setSelectedPlaylistName:  React.Dispatch<React.SetStateAction<string>>;
+  setSelectedPlaylistId: React.Dispatch<React.SetStateAction<string>>;
+}
 
-export function Combobox(props: {playlists: any[]}) {
+export function Combobox(props: ComboboxProps) {
   const [open, setOpen] = React.useState(false)
   const [value, setValue] = React.useState("")
 
@@ -33,15 +40,15 @@ export function Combobox(props: {playlists: any[]}) {
           aria-expanded={open}
           className="w-[200px] justify-between"
         >
-          {value
-            ? props.playlists.find((playlist) => playlist.id === value)?.name
+          {props.selectedPlaylistId
+            ? props.playlists.find((playlist) => playlist.id === props.selectedPlaylistId)?.name
             : "Select Playlist..."}
           <ChevronsUpDown className="opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-[200px] p-0">
         <Command>
-          {/* <CommandInput placeholder="Search Playlists..." className="h-9" /> */}
+          <CommandInput placeholder="Search Playlists..." className="h-9" />
           <CommandList>
             <CommandEmpty>No Playlist found.</CommandEmpty>
             <CommandGroup>
@@ -50,7 +57,8 @@ export function Combobox(props: {playlists: any[]}) {
                   key={playlist.id}
                   value={playlist.id}
                   onSelect={(currentValue) => {
-                    setValue(currentValue === value ? "" : currentValue)
+                    props.setSelectedPlaylistId(currentValue)
+                    props.setSelectedPlaylistName(playlist.name)
                     setOpen(false)
                   }}
                 >
@@ -58,7 +66,7 @@ export function Combobox(props: {playlists: any[]}) {
                   <Check
                     className={cn(
                       "ml-auto",
-                      value === playlist.id ? "opacity-100" : "opacity-0"
+                      props.selectedPlaylistId === playlist.id ? "opacity-100" : "opacity-0"
                     )}
                   />
                 </CommandItem>

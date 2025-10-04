@@ -51,9 +51,6 @@ def exchange_code_for_token(code: str):
     <script>
       window.opener.postMessage({{
         type: 'YOUTUBE_AUTH_SUCCESS',
-        token: '{access_token}',
-        refresh_token: '{refresh_token}',
-        expires_in: {expires_in}
       }}, 'http://localhost:3000'); // Your frontend URL
       window.close();
     </script>
