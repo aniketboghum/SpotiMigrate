@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Header } from "@/components/header";
 import { Combobox } from "@/components/ui/combobox";
+import { Progress } from "@/components/ui/progress";
 import * as React from "react";
 
 export default function Home() {
@@ -14,6 +15,15 @@ export default function Home() {
   const [selectedPlaylistName, setSelectedPlaylistName] = React.useState("")  
 
   const [playlists, setPlaylists] = useState([]);
+  
+  // Progress tracking state
+  const [isMigrating, setIsMigrating] = useState(false);
+  const [migrationProgress, setMigrationProgress] = useState(0);
+  const [migrationStatus, setMigrationStatus] = useState("");
+  const [currentTrack, setCurrentTrack] = useState("");
+  const [totalTracks, setTotalTracks] = useState(0);
+  const [processedTracks, setProcessedTracks] = useState(0);
+  const [tracksAdded, setTracksAdded] = useState(0);
 
   // Check for existing token on component mount
   useEffect(() => {
@@ -138,8 +148,17 @@ export default function Home() {
       return;
     }
 
+    // Reset progress state
+    setIsMigrating(true);
+    setMigrationProgress(0);
+    setMigrationStatus("Starting migration...");
+    setCurrentTrack("");
+    setTotalTracks(0);
+    setProcessedTracks(0);
+    setTracksAdded(0);
+
     try {
-      const response = await fetch('http://127.0.0.1:8000/youtube/playlists', {
+      const response = await fetch('http://127.0.0.1:8000/youtube/playlists/stream', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -150,15 +169,54 @@ export default function Home() {
         }),
       });
 
-      if (response.ok) {
-        const result = await response.json();
-        alert(`Migration successful! Created playlist "${result.message}"`);
-      } else {
-        const error = await response.json();
-        alert(`Migration failed: ${error.detail || 'Unknown error'}`);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const reader = response.body?.getReader();
+      const decoder = new TextDecoder();
+
+      if (!reader) {
+        throw new Error('No response body reader available');
+      }
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+
+        const chunk = decoder.decode(value);
+        const lines = chunk.split('\n');
+
+        for (const line of lines) {
+          if (line.startsWith('data: ')) {
+            try {
+              const data = JSON.parse(line.slice(6));
+              
+              setMigrationProgress(data.progress || 0);
+              setMigrationStatus(data.status || "");
+              setCurrentTrack(data.current_track || "");
+              setTotalTracks(data.total_tracks || 0);
+              setProcessedTracks(data.processed || 0);
+              setTracksAdded(data.tracks_added || 0);
+
+              if (data.completed) {
+                setIsMigrating(false);
+                if (data.error) {
+                  alert(`Migration failed: ${data.error}`);
+                } else {
+                  alert(`Migration successful! Created playlist with ${data.tracks_added} tracks.`);
+                }
+                break;
+              }
+            } catch (e) {
+              console.error('Error parsing SSE data:', e);
+            }
+          }
+        }
       }
     } catch (error) {
       console.error('Migration error:', error);
+      setIsMigrating(false);
       alert('Migration failed. Please try again.');
     }
   };
@@ -266,13 +324,48 @@ export default function Home() {
                     selectedPlaylistName={selectedPlaylistName}
                     setSelectedPlaylistName={setSelectedPlaylistName}/>
           
+          {/* Progress Section */}
+          {isMigrating && (
+            <div className="w-full max-w-2xl mt-6 p-6 bg-card rounded-lg border">
+              <div className="space-y-4">
+                <div className="text-center">
+                  <h3 className="text-lg font-semibold mb-2">Migration Progress</h3>
+                  <p className="text-sm text-muted-foreground">{migrationStatus}</p>
+                </div>
+                
+                <div className="space-y-2">
+                  <div className="flex justify-between text-sm">
+                    <span>{migrationProgress}% Complete</span>
+                    <span>{processedTracks} / {totalTracks} tracks</span>
+                  </div>
+                  <Progress value={migrationProgress} className="w-full" />
+                </div>
+                
+                {currentTrack && (
+                  <div className="text-center">
+                    <p className="text-sm font-medium">Currently processing:</p>
+                    <p className="text-sm text-muted-foreground truncate">{currentTrack}</p>
+                  </div>
+                )}
+                
+                {tracksAdded > 0 && (
+                  <div className="text-center">
+                    <p className="text-sm text-green-600 font-medium">
+                      ✓ {tracksAdded} tracks successfully added
+                    </p>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+          
           <Button 
             size="lg" 
             className="px-8"
             onClick={handleStartMigration}
-            disabled={!selectedPlaylistId || !isSpotifyConnected || !isYouTubeConnected}
+            disabled={!selectedPlaylistId || !isSpotifyConnected || !isYouTubeConnected || isMigrating}
           >
-            Start Migrating
+            {isMigrating ? "Migrating..." : "Start Migrating"}
           </Button>
         </div>
       </main>
