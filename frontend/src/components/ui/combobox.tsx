@@ -19,8 +19,13 @@ import {
     PopoverTrigger,
 } from "@/components/ui/popover"
 
+type Playlist = {
+  id : string;
+  name : string
+}
+
 interface ComboboxProps {
-  playlists: any[];
+  playlists: Playlist[];
   selectedPlaylistId: string;
   selectedPlaylistName: string;
   setSelectedPlaylistName:  React.Dispatch<React.SetStateAction<string>>;
