@@ -43,7 +43,7 @@ export default function Home() {
   // OAuth popup handler function
   const handleSpotifyLogin = () => {
     const popup = window.open(
-      'http://127.0.0.1:8000/spotify/login', // Your custom API endpoint
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/spotify/login`, // Your custom API endpoint
       'spotify-oauth',
       'width=500,height=600,scrollbars=yes,resizable=yes'
     );
@@ -53,7 +53,7 @@ export default function Home() {
       console.log('Received message from popup:', event.origin, event.data);
       
       // Make sure the message is from your backend domain for security
-      if (event.origin !== 'http://127.0.0.1:8000' && event.origin !== 'http://localhost:8000') {
+      if (event.origin !== `${process.env.NEXT_PUBLIC_BACKEND_URL}` && event.origin !== 'http://localhost:8000') {
         console.log('Message rejected due to origin mismatch. Expected: http://127.0.0.1:8000 or http://localhost:8000, Got:', event.origin);
         return;
       }
@@ -62,7 +62,7 @@ export default function Home() {
         // Handle successful authentication
         console.log('Spotify authentication successful:', event.data);
         setIsSpotifyConnected(true);
-        const playlists = await fetch('http://127.0.0.1:8000/spotify/playlists');
+        const playlists = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/spotify/playlists`);
         const playlistsData = await playlists.json();
         setPlaylists(playlistsData.playlists);
 
@@ -94,7 +94,7 @@ export default function Home() {
   // YouTube OAuth popup handler function
   const handleYouTubeLogin = () => {
     const popup = window.open(
-      'http://127.0.0.1:8000/youtube/login',
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/youtube/login`,
       'youtube-oauth',
       'width=500,height=600,scrollbars=yes,resizable=yes'
     );
@@ -104,7 +104,7 @@ export default function Home() {
       console.log('Received message from popup:', event.origin, event.data);
       
       // Make sure the message is from your backend domain for security
-      if (event.origin !== 'http://127.0.0.1:8000' && event.origin !== 'http://localhost:8000') {
+      if (event.origin !== `${process.env.NEXT_PUBLIC_BACKEND_URL}` && event.origin !== 'http://localhost:8000') {
         console.log('Message rejected due to origin mismatch. Expected: http://127.0.0.1:8000 or http://localhost:8000, Got:', event.origin);
         return;
       }
@@ -158,7 +158,7 @@ export default function Home() {
     setTracksAdded(0);
 
     try {
-      const response = await fetch('http://127.0.0.1:8000/youtube/playlists/stream', {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/youtube/playlists/stream`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

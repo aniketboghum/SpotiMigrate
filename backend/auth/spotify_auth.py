@@ -9,7 +9,7 @@ load_dotenv()
 
 spotify_client_id = os.getenv("SPOTIPY_CLIENT_ID")
 spotify_client_secret = os.getenv("SPOTIPY_CLIENT_SECRET")
-spotify_redirect_uri = os.getenv("SPOTIPY_REDIRECT_URI")
+spotify_redirect_uri = f"{os.getenv("BACKEND_URL")}/spotify/callback"
 
 
 current_spotify_user = None  # global Spotify client

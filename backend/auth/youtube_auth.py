@@ -1,13 +1,17 @@
 import os
+from dotenv import load_dotenv
 from google_auth_oauthlib.flow import Flow
 from google.oauth2.credentials import Credentials
 from google.auth.transport.requests import Request
 from fastapi.responses import HTMLResponse
 
+load_dotenv()
+
 SCOPES = ["https://www.googleapis.com/auth/youtube.force-ssl"]
 
 CLIENT_SECRET_FILE = "auth/youtube_client_secret.json"  # download from Google Cloud Console
-REDIRECT_URI = "http://127.0.0.1:8000/youtube/callback"
+
+REDIRECT_URI = f"{os.getenv("BACKEND_URL")}/youtube/callback"
 TOKEN_PATH = "auth/youtube_token.json"
 
 
