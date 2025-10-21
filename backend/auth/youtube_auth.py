@@ -9,15 +9,21 @@ load_dotenv()
 
 SCOPES = ["https://www.googleapis.com/auth/youtube.force-ssl"]
 
-CLIENT_SECRET_FILE = "auth/youtube_client_secret.json"  # download from Google Cloud Console
-
 REDIRECT_URI = f"{os.getenv("BACKEND_URL")}/youtube/callback"
 TOKEN_PATH = "auth/youtube_token.json"
 
+client_config = { "web": {
+                          "client_id": os.getenv("GOOGLE_CLIENT_ID"),
+                          "project_id": os.getenv("GOOGLE_PROJECT_ID"),
+                          "auth_uri": os.getenv("GOOGLE_AUTH_URI"),
+                          "token_uri": os.getenv("GOOGLE_TOKEN_URI"),
+                          "auth_provider_x509_cert_url": os.getenv("GOOGLE_AUTH_PROVIDER"),
+                          "client_secret": os.getenv("GOOGLE_CLIENT_SECRET")}}
+
 
 def get_auth_url():
-    flow = Flow.from_client_secrets_file(
-        CLIENT_SECRET_FILE,
+    flow = Flow.from_client_config(
+        client_config=client_config,
         scopes=SCOPES,
         redirect_uri=REDIRECT_URI,
     )
@@ -30,8 +36,8 @@ def get_auth_url():
 
 
 def exchange_code_for_token(code: str):
-    flow = Flow.from_client_secrets_file(
-        CLIENT_SECRET_FILE,
+    flow = Flow.from_client_config(
+        client_config=client_config,
         scopes=SCOPES,
         redirect_uri=REDIRECT_URI,
     )
@@ -55,7 +61,7 @@ def exchange_code_for_token(code: str):
     <script>
       window.opener.postMessage({{
         type: 'YOUTUBE_AUTH_SUCCESS',
-      }}, 'http://localhost:3000'); // Your frontend URL
+      }}, '{os.getenv("FRONTEND_URL")}'); // Your frontend URL
       window.close();
     </script>
     <p>Authentication successful! This window will close automatically.</p>

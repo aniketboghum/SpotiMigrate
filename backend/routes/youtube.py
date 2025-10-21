@@ -1,3 +1,5 @@
+import os
+from dotenv import load_dotenv
 from fastapi import APIRouter, Request, HTTPException
 from fastapi.responses import RedirectResponse, HTMLResponse, StreamingResponse
 from pydantic import BaseModel
@@ -6,6 +8,8 @@ from service import spotify_service
 import service.youtube_service as youtube_service
 import asyncio
 import json
+
+load_dotenv()
 
 youtube_router = APIRouter()
 
@@ -36,7 +40,7 @@ def callback(request: Request):
       window.opener.postMessage({{
         type: 'YOUTUBE_AUTH_ERROR',
         error: '{error}'
-      }}, 'http://localhost:3000');
+      }}, '{os.getenv("FRONTEND_URL")}');
       window.close();
     </script>
     <p>Authentication failed: {error}</p>
@@ -45,7 +49,7 @@ def callback(request: Request):
         return HTMLResponse(content=html_content)
     
     if not code:
-        html_content = """<!DOCTYPE html>
+        html_content = f"""<!DOCTYPE html>
 <html>
   <head>
     <title>Authentication Error</title>
@@ -55,7 +59,7 @@ def callback(request: Request):
       window.opener.postMessage({{
         type: 'YOUTUBE_AUTH_ERROR',
         error: 'Authorization code not found in callback.'
-      }}, 'http://localhost:3000');
+      }}, '{os.getenv("FRONTEND_URL")}');
       window.close();
     </script>
     <p>Authentication failed: Authorization code not found in callback.</p>
@@ -76,7 +80,7 @@ def callback(request: Request):
       window.opener.postMessage({{
         type: 'YOUTUBE_AUTH_ERROR',
         error: '{str(e)}'
-      }}, 'http://localhost:3000');
+      }}, '{os.getenv("FRONTEND_URL")}');
       window.close();
     </script>
     <p>Authentication failed: {str(e)}</p>

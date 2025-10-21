@@ -53,7 +53,7 @@ export default function Home() {
       console.log('Received message from popup:', event.origin, event.data);
       
       // Make sure the message is from your backend domain for security
-      if (event.origin !== `${process.env.NEXT_PUBLIC_BACKEND_URL}` && event.origin !== 'http://localhost:8000') {
+      if (event.origin !== `${process.env.NEXT_PUBLIC_BACKEND_URL}`) {
         console.log('Message rejected due to origin mismatch. Expected: http://127.0.0.1:8000 or http://localhost:8000, Got:', event.origin);
         return;
       }
@@ -104,7 +104,7 @@ export default function Home() {
       console.log('Received message from popup:', event.origin, event.data);
       
       // Make sure the message is from your backend domain for security
-      if (event.origin !== `${process.env.NEXT_PUBLIC_BACKEND_URL}` && event.origin !== 'http://localhost:8000') {
+      if (event.origin !== `${process.env.NEXT_PUBLIC_BACKEND_URL}`) {
         console.log('Message rejected due to origin mismatch. Expected: http://127.0.0.1:8000 or http://localhost:8000, Got:', event.origin);
         return;
       }

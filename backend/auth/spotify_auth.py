@@ -53,7 +53,7 @@ def callback(request: Request):
                             <script>
                               window.opener.postMessage({{
                                 type: 'SPOTIFY_AUTH_SUCCESS',
-                              }}, 'http://localhost:3000'); // Allow any origin for the parent window
+                              }}, '{os.getenv("FRONTEND_URL")}'); // Allow any origin for the parent window
                               window.close();
                             </script>
                             <p>Authentication successful! This window will close automatically.</p>
@@ -61,19 +61,20 @@ def callback(request: Request):
                         </html>"""
     return HTMLResponse(content=html_content)
   except Exception as e:
-    html_content = html_content = f"""<!DOCTYPE html>
+    html_content = f"""<!DOCTYPE html>
                         <html>
                           <head>
-                            <title>Authentication Success</title>
+                            <title>Authentication Error</title>
                           </head>
                           <body>
                             <script>
                               window.opener.postMessage({{
                                 type: 'SPOTIFY_AUTH_ERROR',
-                              }}, 'http://localhost:3000'); // Allow any origin for the parent window
+                                error: '{str(e)}'
+                              }}, '{os.getenv("FRONTEND_URL")}'); // Allow any origin for the parent window
                               window.close();
                             </script>
-                            <p>Authentication successful! This window will close automatically.</p>
+                            <p>Authentication failed: {str(e)}</p>
                           </body>
                         </html>"""
     return HTMLResponse(content=html_content)
