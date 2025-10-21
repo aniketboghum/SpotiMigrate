@@ -1,4 +1,6 @@
 import os
+import json
+from datetime import datetime
 from dotenv import load_dotenv
 from google_auth_oauthlib.flow import Flow
 from google.oauth2.credentials import Credentials
@@ -10,7 +12,6 @@ load_dotenv()
 SCOPES = ["https://www.googleapis.com/auth/youtube.force-ssl"]
 
 REDIRECT_URI = f"{os.getenv("BACKEND_URL")}/youtube/callback"
-TOKEN_PATH = "auth/youtube_token.json"
 
 client_config = { "web": {
                           "client_id": os.getenv("GOOGLE_CLIENT_ID"),
@@ -20,6 +21,8 @@ client_config = { "web": {
                           "auth_provider_x509_cert_url": os.getenv("GOOGLE_AUTH_PROVIDER"),
                           "client_secret": os.getenv("GOOGLE_CLIENT_SECRET")}}
 
+# Global variable to store YouTube credentials in memory
+youtube_credentials = None
 
 def get_auth_url():
     flow = Flow.from_client_config(
@@ -44,13 +47,17 @@ def exchange_code_for_token(code: str):
     flow.fetch_token(code=code)
     creds = flow.credentials
 
-    with open(TOKEN_PATH, "w") as token_file:
-        token_file.write(creds.to_json())
-
-    # Create HTML response with token information
-    access_token = creds.token if creds.token else ""
-    refresh_token = creds.refresh_token if creds.refresh_token else ""
-    expires_in = 3600  # Default expiry time
+    # Store credentials in memory as JSON instead of file
+    global youtube_credentials
+    youtube_credentials = {
+        "token": creds.token,
+        "refresh_token": creds.refresh_token,
+        "client_id": creds.client_id,
+        "client_secret": creds.client_secret,
+        "token_uri": creds.token_uri,
+        "scopes": creds.scopes,
+        "expiry": creds.expiry.isoformat() if creds.expiry else None
+    }
 
     html_content = f"""<!DOCTYPE html>
 <html>
@@ -72,14 +79,38 @@ def exchange_code_for_token(code: str):
 
 
 def get_credentials():
-    if not os.path.exists(TOKEN_PATH):
+    global youtube_credentials
+    
+    # Check if we have credentials stored in memory
+    if not youtube_credentials:
         return None
 
-    creds = Credentials.from_authorized_user_file(TOKEN_PATH, SCOPES)
+    # Create credentials from the stored JSON info
+    creds = Credentials.from_authorized_user_info(
+        info=youtube_credentials, 
+        scopes=SCOPES
+    )
 
+    # Refresh token if expired
     if creds and creds.expired and creds.refresh_token:
         creds.refresh(Request())
-        with open(TOKEN_PATH, "w") as token_file:
-            token_file.write(creds.to_json())
+        
+        # Update the stored credentials with new token info
+        youtube_credentials.update({
+            "token": creds.token,
+            "expiry": creds.expiry.isoformat() if creds.expiry else None
+        })
 
     return creds
+
+
+def clear_credentials():
+    """Clear stored YouTube credentials from memory"""
+    global youtube_credentials
+    youtube_credentials = None
+
+
+def is_authenticated():
+    """Check if user is authenticated with YouTube"""
+    global youtube_credentials
+    return youtube_credentials is not None

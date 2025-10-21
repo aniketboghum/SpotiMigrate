@@ -21,7 +21,19 @@ class PlaylistMigrationRequest(BaseModel):
 @youtube_router.get("/login")
 def login():
     auth_url = youtube_auth.get_auth_url()
-    return RedirectResponse(auth_url)   
+    return RedirectResponse(auth_url)
+
+@youtube_router.post("/logout")
+def logout():
+    """Clear YouTube credentials from memory"""
+    youtube_auth.clear_credentials()
+    return {"message": "Successfully logged out from YouTube"}
+
+@youtube_router.get("/status")
+def get_auth_status():
+    """Check if user is authenticated with YouTube"""
+    is_auth = youtube_auth.is_authenticated()
+    return {"authenticated": is_auth}
 
 @youtube_router.get("/callback")
 def callback(request: Request):         
