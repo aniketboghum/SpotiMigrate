@@ -165,7 +165,8 @@ export default function Home() {
         },
         body: JSON.stringify({
           sp_playlistId: selectedPlaylistId,
-          yt_playlist_name: selectedPlaylistName
+          yt_playlist_name: selectedPlaylistName,
+          is_ai_playlist: false,
         }),
       });
 

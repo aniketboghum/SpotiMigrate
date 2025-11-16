@@ -1,4 +1,5 @@
 import auth.spotify_auth as spotify_auth  
+import json 
 
 def get_spotify_playlists():
     if not spotify_auth.current_spotify_user:

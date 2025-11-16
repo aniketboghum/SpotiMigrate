@@ -4,6 +4,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from routes.spotify import spotify_router
 from routes.youtube import youtube_router
+from routes.ai import ai_router
 
 load_dotenv()
 
@@ -13,7 +14,6 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# Configure CORS to allow requests from your Next.js frontend
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
@@ -26,6 +26,7 @@ app.add_middleware(
 
 app.include_router(router=spotify_router, prefix='/spotify', tags=['SPOTIFY'])
 app.include_router(router=youtube_router, prefix='/youtube', tags=['YOUTUBE'])
+app.include_router(router=ai_router, prefix='/ai', tags=['AI'])
 
 # Health check endpoint
 @app.get("/health")

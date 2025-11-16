@@ -1,9 +1,11 @@
 import os
+from typing import Optional
 from dotenv import load_dotenv
 from fastapi import APIRouter, Request, HTTPException
 from fastapi.responses import RedirectResponse, HTMLResponse, StreamingResponse
 from pydantic import BaseModel
 import auth.youtube_auth as youtube_auth
+from service import ai_service
 from service import spotify_service
 import service.youtube_service as youtube_service
 import asyncio
@@ -17,6 +19,7 @@ youtube_router = APIRouter()
 class PlaylistMigrationRequest(BaseModel):
     sp_playlistId: str
     yt_playlist_name: str
+    is_ai_playlist: bool
 
 @youtube_router.get("/login")
 def login():
@@ -43,40 +46,40 @@ def callback(request: Request):
     if error:
         # Handle OAuth error
         html_content = f"""<!DOCTYPE html>
-<html>
-  <head>
-    <title>Authentication Error</title>
-  </head>
-  <body>
-    <script>
-      window.opener.postMessage({{
-        type: 'YOUTUBE_AUTH_ERROR',
-        error: '{error}'
-      }}, '{os.getenv("FRONTEND_URL")}');
-      window.close();
-    </script>
-    <p>Authentication failed: {error}</p>
-  </body>
-</html>"""
+                            <html>
+                              <head>
+                                <title>Authentication Error</title>
+                              </head>
+                              <body>
+                                <script>
+                                  window.opener.postMessage({{
+                                    type: 'YOUTUBE_AUTH_ERROR',
+                                    error: '{error}'
+                                  }}, '{os.getenv("FRONTEND_URL")}');
+                                  window.close();
+                                </script>
+                                <p>Authentication failed: {error}</p>
+                              </body>
+                            </html>"""
         return HTMLResponse(content=html_content)
     
     if not code:
         html_content = f"""<!DOCTYPE html>
-<html>
-  <head>
-    <title>Authentication Error</title>
-  </head>
-  <body>
-    <script>
-      window.opener.postMessage({{
-        type: 'YOUTUBE_AUTH_ERROR',
-        error: 'Authorization code not found in callback.'
-      }}, '{os.getenv("FRONTEND_URL")}');
-      window.close();
-    </script>
-    <p>Authentication failed: Authorization code not found in callback.</p>
-  </body>
-</html>"""
+                            <html>
+                              <head>
+                                <title>Authentication Error</title>
+                              </head>
+                              <body>
+                                <script>
+                                  window.opener.postMessage({{
+                                    type: 'YOUTUBE_AUTH_ERROR',
+                                    error: 'Authorization code not found in callback.'
+                                  }}, '{os.getenv("FRONTEND_URL")}');
+                                  window.close();
+                                </script>
+                                <p>Authentication failed: Authorization code not found in callback.</p>
+                              </body>
+                            </html>"""
         return HTMLResponse(content=html_content)
     
     try:
@@ -145,7 +148,12 @@ async def create_playlists_with_progress(request: PlaylistMigrationRequest):
             
             # Get tracks from the specified Spotify playlist
             yield f"data: {json.dumps({'progress': 10, 'status': 'Fetching Spotify tracks...', 'current_track': '', 'total_tracks': 0})}\n\n"
-            sp_tracks = spotify_service.get_playlist_tracks(request.sp_playlistId)
+            
+            if request.is_ai_playlist:
+              sp_tracks = ai_service.get_playlist()
+              print(sp_tracks)
+            else:
+              sp_tracks = spotify_service.get_playlist_tracks(request.sp_playlistId)
 
             tracks_added = 0
             total_tracks = len(sp_tracks['tracks']) if sp_tracks and sp_tracks['tracks'] else 0
@@ -192,4 +200,3 @@ async def create_playlists_with_progress(request: PlaylistMigrationRequest):
             "Content-Type": "text/event-stream",
         }
     )
-    
