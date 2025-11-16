@@ -224,7 +224,7 @@ export default function Home() {
 
   return (
     <div className="relative min-h-screen bg-gradient-to-b from-background to-muted/20">
-      <Header />
+      <Header isUserLoggedinYoutube={isYouTubeConnected}/>
       {/* Main content */}
       <main className="mx-auto max-w-6xl px-4 sm:px-6 pt-28 pb-16">
         {/* Hero */}
