@@ -305,7 +305,7 @@ export default function Home() {
         <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           <div className="rounded-xl border bg-card text-card-foreground p-6">
             <h3 className="font-semibold text-lg">Step: 1</h3>
-            <p className="mt-2 text-sm text-muted-foreground">Login to Spotify and Youtube Music by clicking the button above.</p>
+            <p className="mt-2 text-sm text-muted-foreground">Login to Spotify and Youtube Music by clicking the button above using a Desktop.</p>
           </div>
           <div className="rounded-xl border bg-card text-card-foreground p-6">
             <h3 className="font-semibold text-lg">Step: 2</h3>

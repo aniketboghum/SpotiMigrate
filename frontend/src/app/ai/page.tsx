@@ -176,6 +176,8 @@ export default function AIPage() {
             </h1>
             <p className="mt-4 text-base sm:text-lg text-muted-foreground">
               Create personalized playlists based on your mood and favorite genre using AI.
+              <br/>
+              It is Recommended to use a Desktop.
             </p>
           </div>
         </section>
